@@ -50,7 +50,7 @@ class TasksController extends Controller
         // バリデーション
         $request->validate([
             'content' => 'required|max:255',
-             'title' => 'required|max:10',
+            'status' => 'required|max:10',
         ]);
         
         // タスクを入力
@@ -116,7 +116,7 @@ class TasksController extends Controller
         $task = Task::findOrFail($id);
         // タスクを更新
         $task->content = $request->content;
-        $task->status = $task->status;  
+        $task->status = $request->status;  
         $task->save();
 
         // トップページへリダイレクトさせる
