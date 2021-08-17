@@ -86,6 +86,10 @@ public function index()
         // idの値でタスクを検索して取得
         $task = Task::findOrFail($id);
 
+        if (\Auth::id()  != $task->user_id) {   //タスクが自分のでなければ
+        return redirect('/');        //トップページ(/)にリダイレクト
+        }
+    
         // タスク詳細ビューでそれを表示
         return view('tasks.show', [
             'task' => $task,
@@ -102,6 +106,10 @@ public function index()
     {
         // idの値でタスクを検索して取得
         $task = Task::findOrFail($id);
+        
+        if (\Auth::id()  != $task->user_id) {   //タスクが自分のでなければ
+        return redirect('/');        //トップページ(/)にリダイレクト
+        }
 
         // タスク編集ビューでそれを表示
         return view('tasks.edit', [
@@ -145,6 +153,11 @@ public function index()
     {
         // idの値でタスクを検索して取得
         $task = Task::findOrFail($id);
+        
+        if (\Auth::id()  != $task->user_id) {   //タスクが自分のでなければ
+        return redirect('/');        //トップページ(/)にリダイレクト
+        }
+        
         // タスクを削除
         $task->delete();
 
